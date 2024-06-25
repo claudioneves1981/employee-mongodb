@@ -25,7 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ExternalClientConfiguration {
 
     @Bean
-    public MongoClient mongoClient(@Value("mongodb+srv://cfneguacu:Neves123@cluster0.ivvg4ly.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0") String mongoDatabaseUri) {
+    public MongoClient mongoClient(@Value("${MONGO_DATABASE_URI:}") String mongoDatabaseUri) {
         if (mongoDatabaseUri == null || mongoDatabaseUri.isEmpty()) {
            String errorMessage = "MONGO_DATABASE_URI not set in the environment variables";
            // log.warn(errorMessage);
