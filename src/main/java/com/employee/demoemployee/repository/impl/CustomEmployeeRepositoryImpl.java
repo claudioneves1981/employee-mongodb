@@ -1,6 +1,6 @@
 package com.employee.demoemployee.repository.impl;
 
-import com.employee.demoemployee.model.Employee;
+import com.employee.demoemployee.entity.EmployeeEntity;
 import com.employee.demoemployee.repository.CustomEmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
@@ -18,7 +18,7 @@ public class CustomEmployeeRepositoryImpl implements CustomEmployeeRepository {
     private MongoTemplate mongoTemplate;
 
     @Override
-    public Employee updateEmployee(String id, Employee employee) {
+    public EmployeeEntity updateEmployee(String id, EmployeeEntity employee) {
         Query query = new Query(Criteria.where("id").is(id));
         Update update = new Update()
                 .set("firstname", employee.getFirstname())
@@ -29,6 +29,6 @@ public class CustomEmployeeRepositoryImpl implements CustomEmployeeRepository {
                 query,
                 update,
                 FindAndModifyOptions.options().returnNew(true),
-                Employee.class);
+                EmployeeEntity.class);
     }
 }

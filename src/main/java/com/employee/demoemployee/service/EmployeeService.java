@@ -2,7 +2,7 @@ package com.employee.demoemployee.service;
 import java.util.List;
 import java.util.Optional;
 
-import com.employee.demoemployee.model.Employee;
+import com.employee.demoemployee.entity.EmployeeEntity;
 import com.employee.demoemployee.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -15,36 +15,36 @@ public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    public Optional<Employee> getById(String id) {
+    public Optional<EmployeeEntity> getById(String id) {
         return employeeRepository.findById(id);
     }
 
-    public List<Employee> getByFirstname(String firstname) {
+    public List<EmployeeEntity> getByFirstname(String firstname) {
         return employeeRepository.findByFirstname(firstname);
     }
 
-    public List<Employee> getByLastname(String lastname) {
+    public List<EmployeeEntity> getByLastname(String lastname) {
         return employeeRepository.findByLastname(lastname);
     }
 
-    public List<Employee> getByFirstnameAndLastname(String firstname, String lastname) {
+    public List<EmployeeEntity> getByFirstnameAndLastname(String firstname, String lastname) {
         return employeeRepository.findByFirstnameAndLastName(firstname, lastname);
     }
 
-    public Optional<Employee> getByEmail(String email) {
+    public Optional<EmployeeEntity> getByEmail(String email) {
         return employeeRepository.findByEmail(email);
     }
 
-    public List<Employee> getAll(int pageNumber, int pageSize) {
+    public List<EmployeeEntity> getAll(int pageNumber, int pageSize) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
         return employeeRepository.findAll(pageable).getContent();
     }
 
-    public Employee create(Employee employee) {
+    public EmployeeEntity create(EmployeeEntity employee) {
         return employeeRepository.save(employee);
     }
 
-    public Employee update(String id, Employee employee) {
+    public EmployeeEntity update(String id, EmployeeEntity employee) {
         return employeeRepository.updateEmployee(id, employee);
     }
 

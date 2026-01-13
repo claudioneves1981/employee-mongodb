@@ -1,7 +1,7 @@
 package com.employee.demoemployee.repository;
 
-import com.employee.demoemployee.model.Employee;
+import com.employee.demoemployee.entity.EmployeeEntity;
 
 public interface CustomEmployeeRepository {
-    Employee updateEmployee(String id, Employee employee);
+    EmployeeEntity updateEmployee(String id, EmployeeEntity employee);
 }
