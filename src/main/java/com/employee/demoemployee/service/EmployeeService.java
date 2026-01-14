@@ -15,8 +15,8 @@ public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    public Optional<EmployeeEntity> getById(String id) {
-        return employeeRepository.findById(id);
+    public Optional<EmployeeEntity> getById(Long id) {
+        return Optional.ofNullable(employeeRepository.findById(id));
     }
 
     public List<EmployeeEntity> getByFirstname(String firstname) {
@@ -44,8 +44,8 @@ public class EmployeeService {
         return employeeRepository.save(employee);
     }
 
-    public EmployeeEntity update(String id, EmployeeEntity employee) {
-        return employeeRepository.updateEmployee(id, employee);
+    public EmployeeEntity update(EmployeeEntity employee) {
+        return employeeRepository.updateEmployee(employee);
     }
 
     public void delete(String id) {

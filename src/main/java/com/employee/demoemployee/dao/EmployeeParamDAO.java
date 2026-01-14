@@ -32,11 +32,9 @@ public class EmployeeParamDAO {
             statement.setTimestamp(3, timestamp);
             statement.executeUpdate();
 
-            //if(statement instanceof StatementImpl impl)
                 entity.getModules().stream()
                         .map(ModuleEntity::getId)
                         .forEach(m -> accessDAO.insert(entity.getId(),m));
-                //entity.setId(impl.getLastInsertID());
         }catch(SQLException ex){
             ex.printStackTrace();
         }
@@ -81,7 +79,7 @@ public class EmployeeParamDAO {
 
     }
 
-    public List<EmployeeEntity> findAll(){
+    public List<EmployeeEntity> findAllByOrderByName(){
 
         List<EmployeeEntity> entities = new ArrayList<>();
         try(

@@ -3,33 +3,28 @@ import java.util.List;
 import java.util.Optional;
 
 import com.employee.demoemployee.entity.EmployeeEntity;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.mongodb.repository.Query;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
-public interface EmployeeRepository extends MongoRepository<EmployeeEntity, String>, CustomEmployeeRepository {
+@Repository
+public interface EmployeeRepository extends CustomEmployeeRepository, JpaRepository<EmployeeEntity, Long> {
 
-    // Custom query to find employees by firstname
-    @Query("{ 'firstname' : ?0 }")
-    public List<EmployeeEntity> findByFirstname(String firstname);
+    List<EmployeeEntity> findAllByOrderByName();
 
-    // Custom query to find employees by lastname
-    @Query("{ 'lastname' : ?0 }")
-    public List<EmployeeEntity> findByLastname(String lastname);
+    @Query(
+    "SELECT e.id as employee_id," +
+            "e.name, " +
+            "e.salary, " +
+            "e.birthday, " +
+            "c.id as contact_id, " +
+            "c.description," +
+            "c.type " +
+            "FROM EmployeeEntity e " +
+            "LEFT JOIN ContactEntity c " +
+            "ON c.id = e.id " +
+            "WHERE e.id = ?"
+    )
+    EmployeeEntity findById(long id);
 
-    // Custom query to find employees by firstname and lastname
-    @Query("{ 'firstname' : ?0, 'lastname' : ?1}")
-    public List<EmployeeEntity> findByFirstnameAndLastName(String firstname, String lastname);
-
-    // Custom query to find employee by email
-    @Query("{ 'email' : ?0 }")
-    public Optional<EmployeeEntity> findByEmail(String email);
-
-    /**
-     * Custom paginated query to find all employees
-     * projecting firstname, lastname, and email
-     */
-    @Query(value = "{}", fields = "{ 'firstname' : 1, 'lastname' : 1, 'email' : 1 }")
-    public Page<EmployeeEntity> findAllProjectedBy(Pageable pageable);
 }

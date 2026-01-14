@@ -1,23 +1,15 @@
 package com.employee.demoemployee;
 
 import com.employee.demoemployee.dao.ContactDAO;
-import com.employee.demoemployee.dao.EmployeeDAO;
 import com.employee.demoemployee.dao.EmployeeParamDAO;
 import com.employee.demoemployee.dao.ModuleDAO;
 import com.employee.demoemployee.entity.ContactEntity;
-import com.employee.demoemployee.entity.EmployeeAuditEntity;
 import com.employee.demoemployee.entity.EmployeeEntity;
 import com.employee.demoemployee.entity.ModuleEntity;
 import com.github.javafaker.Faker;
 import org.flywaydb.core.Flyway;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration;
-import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -26,7 +18,6 @@ import java.util.stream.Stream;
 public class DemoApplication {
 
 	private final static EmployeeParamDAO employeeDAO = new EmployeeParamDAO();
-	private final static EmployeeAuditDAO employeeAuditDAO = new EmployeeAuditDAO();
 	private final static ContactDAO contactDAO = new ContactDAO();
 	private final static ModuleDAO moduleDAO = new ModuleDAO();
 
@@ -61,7 +52,7 @@ public class DemoApplication {
 			}
 
 			return employee;
-		}).limit(3).toList();
+		}).limit(100).toList();
 
 	    entities.forEach(employeeDAO::insert);
 
