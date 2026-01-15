@@ -25,6 +25,8 @@ public interface EmployeeRepository extends CustomEmployeeRepository, JpaReposit
             "ON c.id = e.id " +
             "WHERE e.id = ?"
     )
-    EmployeeEntity findById(long id);
+    EmployeeEntity findByIdParametrized(Long id);
+
+
 
 }
