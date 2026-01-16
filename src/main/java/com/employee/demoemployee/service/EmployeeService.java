@@ -44,7 +44,17 @@ public class EmployeeService {
     }
 
     public EmployeeEntity update(EmployeeEntity employee) {
-        return employeeRepository.updateEmployee(employee);
+
+        EmployeeEntity updatedEmployee = new EmployeeEntity();
+
+        if(employee.getId()!=null){
+          updatedEmployee.setName(employee.getName());
+          updatedEmployee.setSalary(employee.getSalary());
+          updatedEmployee.setBirthday(employee.getBirthday());
+          updatedEmployee.setId(employee.getId());
+        }
+
+        return employeeRepository.save(updatedEmployee);
     }
 
     public void delete(Long id) {

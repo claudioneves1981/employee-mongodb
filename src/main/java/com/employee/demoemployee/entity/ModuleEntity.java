@@ -6,16 +6,20 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-@Entity
+@Entity(name="modules")
 @Table(name="modules")
 public class ModuleEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
     private String name;
 
-    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "accesses",
+            joinColumns = @JoinColumn(name = "module_id"),
+            inverseJoinColumns = @JoinColumn(name = "employee_id") )
     private List<EmployeeEntity> employees;
 
 }

@@ -2,6 +2,7 @@ package com.employee.demoemployee.entity;
 
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToOne;
 import lombok.Data;
 

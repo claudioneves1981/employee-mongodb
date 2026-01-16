@@ -1,6 +1,5 @@
 package com.employee.demoemployee.repository;
 import java.util.List;
-import java.util.Optional;
 
 import com.employee.demoemployee.entity.EmployeeEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -8,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface EmployeeRepository extends CustomEmployeeRepository, JpaRepository<EmployeeEntity, Long> {
+public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long> {
 
     List<EmployeeEntity> findAllByOrderByName();
 
@@ -20,8 +19,8 @@ public interface EmployeeRepository extends CustomEmployeeRepository, JpaReposit
             "c.id as contact_id, " +
             "c.description," +
             "c.type " +
-            "FROM EmployeeEntity e " +
-            "LEFT JOIN ContactEntity c " +
+            "FROM employees e " +
+            "LEFT JOIN contacts c " +
             "ON c.id = e.id " +
             "WHERE e.id = ?"
     )
