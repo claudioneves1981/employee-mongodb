@@ -1,13 +1,11 @@
 package com.employee.demoemployee.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
 @Entity
+@Table(name="contacts")
 public class ContactEntity {
 
     @Id
@@ -17,8 +15,7 @@ public class ContactEntity {
 
     private String type;
 
-    @ManyToOne
-    //@JoinColumn(name = "employee_id" )
+    @ManyToOne(cascade = CascadeType.ALL)
     private EmployeeEntity employee;
 
 }

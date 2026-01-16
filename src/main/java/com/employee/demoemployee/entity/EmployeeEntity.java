@@ -1,7 +1,6 @@
 package com.employee.demoemployee.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -10,6 +9,7 @@ import java.util.List;
 
 @Data
 @Entity
+@Table(name="employees")
 public class EmployeeEntity {
 
     @Id
@@ -18,7 +18,11 @@ public class EmployeeEntity {
     private String name;
     private BigDecimal salary;
     private OffsetDateTime birthday;
+
+    @OneToMany(cascade = CascadeType.ALL)
     private List<ContactEntity> contacts;
+
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<ModuleEntity> modules;
 
 }

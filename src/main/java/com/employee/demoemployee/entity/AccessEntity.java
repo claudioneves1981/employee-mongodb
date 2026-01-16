@@ -2,10 +2,12 @@ package com.employee.demoemployee.entity;
 
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.Data;
 
 @Data
 @Entity
+@Table(name="accesses")
 public class AccessEntity {
 
     @EmbeddedId

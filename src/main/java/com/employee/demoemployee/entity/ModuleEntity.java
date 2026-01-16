@@ -1,13 +1,13 @@
 package com.employee.demoemployee.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
 @Entity
+@Table(name="modules")
 public class ModuleEntity {
 
     @Id
@@ -15,6 +15,7 @@ public class ModuleEntity {
 
     private String name;
 
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<EmployeeEntity> employees;
 
 }
