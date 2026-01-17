@@ -7,18 +7,20 @@ import com.employee.demoemployee.entity.ModuleEntity;
 import com.employee.demoemployee.repository.AccessRepository;
 import com.employee.demoemployee.repository.EmployeeRepository;
 import com.employee.demoemployee.repository.ModuleRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class AccessService {
 
-    private AccessRepository accessRepository;
+    private final AccessRepository accessRepository;
 
-    private EmployeeRepository employeeRepository;
+    private final EmployeeRepository employeeRepository;
 
-    private ModuleRepository moduleRepository;
+    private final ModuleRepository moduleRepository;
 
     public void create(Long employee_id, Long module_id){
 
