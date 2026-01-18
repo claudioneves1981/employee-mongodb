@@ -1,11 +1,17 @@
 package com.employee.demoemployee.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity(name="contacts")
 @Table(name="contacts")
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode
 public class ContactEntity {
 
     @Id
@@ -17,9 +23,7 @@ public class ContactEntity {
     private String type;
 
     @ManyToOne
-    @JoinTable(name = "employees",
-            joinColumns = @JoinColumn(name = "id"),
-            inverseJoinColumns = @JoinColumn(name = "employee_id") )
+    @JoinColumn(name = "employee_id")
     private EmployeeEntity employee;
 
 }
