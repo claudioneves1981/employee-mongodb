@@ -16,10 +16,10 @@ public class ContactEntity {
 
     private String type;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinTable(name = "employees",
             joinColumns = @JoinColumn(name = "id"),
-            inverseJoinColumns = @JoinColumn(name = "id") )
+            inverseJoinColumns = @JoinColumn(name = "employee_id") )
     private EmployeeEntity employee;
 
 }

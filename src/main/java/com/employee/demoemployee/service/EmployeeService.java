@@ -25,13 +25,18 @@ public class EmployeeService {
         return employeeRepository.findById(id);
     }
 
-    public EmployeeEntity getByIdParametrized(Long id) {
+    public Optional<EmployeeEntity> getByIdParametrized(Long id) {
         return employeeRepository.findByIdParametrized(id);
     }
 
     public List<EmployeeEntity> getAll(int pageNumber, int pageSize) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
         return employeeRepository.findAll(pageable).getContent();
+    }
+
+    public List<EmployeeEntity> getAllByName(int pageNumber, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        return employeeRepository.findAllByOrderByName(pageable).getContent();
     }
 
     public EmployeeEntity create(EmployeeEntity employee) {
@@ -61,9 +66,4 @@ public class EmployeeService {
         employeeRepository.deleteById(id);
     }
 
-    public List<EmployeeEntity> getAllByOrderByName(){
-
-        return employeeRepository.findAllByOrderByName();
-
-    }
 }

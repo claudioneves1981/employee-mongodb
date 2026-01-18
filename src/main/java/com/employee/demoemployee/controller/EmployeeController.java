@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import com.employee.demoemployee.entity.EmployeeEntity;
 import com.employee.demoemployee.service.EmployeeService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,57 +23,47 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestController
 @RequestMapping("/employees")
+@RequiredArgsConstructor
 public class EmployeeController {
 
-    @Autowired
-    private EmployeeService employeeService;
+    private final EmployeeService employeeService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<EmployeeEntity> getById(@PathVariable String id) {
-        Optional<EmployeeEntity> employee = employeeService.getById(id);
+    public ResponseEntity<EmployeeEntity> getById(@PathVariable Long id) {
+        Optional<EmployeeEntity> employee = employeeService.getByIdParametrized(id);
         return employee.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping
-    public ResponseEntity<List<EmployeeEntity>> getEmployees(
-            @RequestParam(required = false) String firstname,
-            @RequestParam(required = false) String lastname,
-            @RequestParam(required = false) String email,
+    public ResponseEntity<List<EmployeeEntity>> getAllEmployees(
             @RequestParam(defaultValue = "0") int pageNumber,
             @RequestParam(defaultValue = "10") int pageSize) {
-
-        if (firstname != null && lastname != null) {
-            return ResponseEntity.ok(employeeService.getByFirstnameAndLastname(firstname, lastname));
-        } else if (firstname != null) {
-            return ResponseEntity.ok(employeeService.getByFirstname(firstname));
-        } else if (lastname != null) {
-            return ResponseEntity.ok(employeeService.getByLastname(lastname));
-        } else if (email != null) {
-            return employeeService.getByEmail(email)
-                    .map(List::of)
-                    .map(ResponseEntity::ok)
-                    .orElseGet(() -> ResponseEntity.notFound().build());
-        } else {
             return ResponseEntity.ok(employeeService.getAll(pageNumber, pageSize));
-        }
+    }
+
+    @GetMapping("/order-by-name")
+    public ResponseEntity<List<EmployeeEntity>> getAllEmployeesByName(
+            @RequestParam(defaultValue = "0") int pageNumber,
+            @RequestParam(defaultValue = "10") int pageSize) {
+        return ResponseEntity.ok(employeeService.getAllByName(pageNumber, pageSize));
     }
 
     @PostMapping
     public ResponseEntity<EmployeeEntity> create(@RequestBody EmployeeEntity employee) {
-        EmployeeEntity createdEmployee = employeeService.create(employee);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdEmployee);
+        employeeService.create(employee);
+        return ResponseEntity.status(HttpStatus.CREATED).body(employee);
     }
 
     @PutMapping
     public ResponseEntity<EmployeeEntity> update(@RequestBody EmployeeEntity employee) {
-        EmployeeEntity updatedEmployee = employeeService.update(employee.getId(), employee);
+        EmployeeEntity updatedEmployee = employeeService.update(employee);
         return ResponseEntity.ok(updatedEmployee);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable String id) {
-        Optional<EmployeeEntity> employee = employeeService.getById(id);
-        if (!employee.isPresent()) {
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        Optional<EmployeeEntity> employee = employeeService.getByIdParametrized(id);
+        if (employee.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT)
                     .body("No employee matches ID " + id);
         }

@@ -23,7 +23,7 @@ public class EmployeeEntity {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "contacts",
             joinColumns = @JoinColumn(name = "employee_id"),
-            inverseJoinColumns = @JoinColumn(name = "id") )
+            inverseJoinColumns = @JoinColumn(name = "contact_id") )
     private List<ContactEntity> contacts;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})

@@ -31,8 +31,23 @@ public class AccessService {
         accessesBelogingPK.setEmployee(employee.get());
         AccessEntity access = new AccessEntity();
         access.setId(accessesBelogingPK);
+        access.setCreateData(false);
+        access.setReadData(false);
+        access.setUpdateData(false);
+        access.setDeleteData(false);
 
         accessRepository.save(access);
+
+    }
+
+    public void update(AccessEntity access){
+
+        accessRepository.update(access.isReadData(),
+                access.isDeleteData(),
+                access.isCreateData(),
+                access.isUpdateData(),
+                access.getId().getEmployee().getId(),
+                access.getId().getModule().getId());
 
     }
 
