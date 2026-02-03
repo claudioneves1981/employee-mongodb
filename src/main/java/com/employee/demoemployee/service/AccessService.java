@@ -22,13 +22,19 @@ public class AccessService {
 
     private final ModuleRepository moduleRepository;
 
-    public void create(Long employee_id, Long module_id){
+    public void create(EmployeeEntity employee, ModuleEntity module){
 
         AccessesBelogingPK accessesBelogingPK = new AccessesBelogingPK();
-        Optional<EmployeeEntity> employee = employeeRepository.findById(employee_id);
-        Optional<ModuleEntity> module = moduleRepository.findById(module_id);
-        accessesBelogingPK.setModule(module.get());
-        accessesBelogingPK.setEmployee(employee.get());
+
+        //Optional<EmployeeEntity> employee = employeeRepository.findById(employee_id);
+        //Optional<ModuleEntity> module = moduleRepository.findById(module_id);
+
+        //employeeRepository.save(employee);
+        //moduleRepository.save(module);
+
+        accessesBelogingPK.setModule(module);
+        accessesBelogingPK.setEmployee(employee);
+
         AccessEntity access = new AccessEntity();
         access.setId(accessesBelogingPK);
         access.setCreateData(false);

@@ -1,10 +1,8 @@
 package com.employee.demoemployee.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @Entity(name="contacts")
@@ -24,6 +22,7 @@ public class ContactEntity {
 
     @ManyToOne
     @JoinColumn(name = "employee_id")
+    @JsonIgnore
     private EmployeeEntity employee;
 
 }

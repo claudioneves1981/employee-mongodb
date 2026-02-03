@@ -18,7 +18,7 @@ public class AccessController {
 
     @PostMapping
     public ResponseEntity<AccessEntity> create(@RequestBody AccessEntity access) {
-        accessService.create(access.getId().getEmployee().getId(), access.getId().getEmployee().getId());
+        accessService.create(access.getId().getEmployee(), access.getId().getModule());
         return ResponseEntity.status(HttpStatus.CREATED).body(access);
     }
 

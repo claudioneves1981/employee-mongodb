@@ -2,13 +2,11 @@ package com.employee.demoemployee.service;
 import java.util.List;
 import java.util.Optional;
 
-import com.employee.demoemployee.entity.AccessEntity;
 import com.employee.demoemployee.entity.EmployeeEntity;
 import com.employee.demoemployee.entity.ModuleEntity;
-import com.employee.demoemployee.repository.AccessRepository;
 import com.employee.demoemployee.repository.EmployeeRepository;
+import com.employee.demoemployee.repository.ModuleRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -18,6 +16,8 @@ import org.springframework.stereotype.Service;
 public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
+
+    private final ModuleRepository moduleRepository;
 
     private final AccessService accessService;
 
@@ -41,9 +41,14 @@ public class EmployeeService {
 
     public EmployeeEntity create(EmployeeEntity employee) {
 
-        employee.getModules().stream()
-                .map(ModuleEntity::getId)
-                .forEach(m -> accessService.create(employee.getId(),m));
+
+        List<ModuleEntity> modules = employee.getModules();
+        for(ModuleEntity module : modules){
+
+                moduleRepository.save(module);
+                accessService.create(employee, module);
+
+        }
 
         return employeeRepository.save(employee);
     }

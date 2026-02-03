@@ -13,9 +13,11 @@ import java.util.Objects;
 public class AccessesBelogingPK {
 
     @ManyToOne
+    @JoinColumn(name = "employee_id")
     private EmployeeEntity employee;
 
     @ManyToOne
+    @JoinColumn(name = "module_id")
     private ModuleEntity module;
 
     @Override
