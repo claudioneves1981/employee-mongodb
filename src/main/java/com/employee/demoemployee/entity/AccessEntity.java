@@ -1,8 +1,6 @@
 package com.employee.demoemployee.entity;
 
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -18,6 +16,16 @@ public class AccessEntity {
 
     @EmbeddedId
     private AccessesBelogingPK id = new AccessesBelogingPK();
+
+    @ManyToOne
+    @MapsId("employeeId")
+    @JoinColumn(name = "employee_id")
+    private EmployeeEntity employee;
+
+    @ManyToOne
+    @MapsId("moduleId")
+    @JoinColumn(name = "module_id")
+    private ModuleEntity module;
 
     private boolean readData;
 

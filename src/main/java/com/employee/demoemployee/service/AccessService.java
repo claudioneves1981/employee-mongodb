@@ -21,7 +21,7 @@ public class AccessService {
 
     private final ModuleRepository moduleRepository;
 
-    public void create(EmployeeEntity employee, ModuleEntity module){
+    public void create(Long employeeId, Long moduleId){
 
         AccessesBelogingPK accessesBelogingPK = new AccessesBelogingPK();
 
@@ -41,8 +41,8 @@ public class AccessService {
         //moduleRepository.save(module);
 
 
-        accessesBelogingPK.setEmployee(employee);
-        accessesBelogingPK.setModule(module);
+        accessesBelogingPK.setEmployeeId(employeeId);
+        accessesBelogingPK.setModuleId(moduleId);
 
 
         AccessEntity access = new AccessEntity();
@@ -61,15 +61,15 @@ public class AccessService {
 
     }
 
-    public void update(AccessEntity access){
+    public void update(AccessEntity access) {
 
-        accessRepository.update(access.isReadData(),
-                access.isDeleteData(),
-                access.isCreateData(),
-                access.isUpdateData(),
-                access.getId().getEmployee().getId(),
-                access.getId().getModule().getId());
-
+        AccessEntity accessEntity = new AccessEntity();
+        accessEntity.setReadData(access.isReadData());
+        accessEntity.setDeleteData(access.isDeleteData());
+        accessEntity.setCreateData(access.isCreateData());
+        accessEntity.setUpdateData(access.isUpdateData());
+        accessEntity.setId(access.getId());
     }
+
 
 }

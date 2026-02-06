@@ -19,11 +19,11 @@ public class ContactController {
 
     private final ContactService contactService;
 
-    /*@PostMapping
+    @PostMapping
     public ResponseEntity<ContactEntity> create(@RequestBody ContactEntity contact) {
         contactService.create(contact);
         return ResponseEntity.status(HttpStatus.CREATED).body(contact);
-    }*/
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<List<ContactEntity>> getByEmployeeId(@PathVariable Long id){

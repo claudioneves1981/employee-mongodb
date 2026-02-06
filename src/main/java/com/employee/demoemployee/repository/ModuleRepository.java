@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ModuleRepository extends JpaRepository<ModuleEntity, Long> {
 
-    @Query("select m.id module_id, " +
+    /*@Query("select m.id module_id, " +
             "                m.name module_name, " +
             "                e.id employee_id, " +
             "                e.name employee_name, " +
@@ -20,6 +20,6 @@ public interface ModuleRepository extends JpaRepository<ModuleEntity, Long> {
             "                inner join employees e " +
             "                on e.id = a.id.employee.id" +
             "                order by m.id")
-    List<ModuleEntity> findAllParametrized();
+    List<ModuleEntity> findAllParametrized();*/
 
 }

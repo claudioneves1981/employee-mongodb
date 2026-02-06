@@ -14,7 +14,7 @@ public class ModuleService {
 
     private final ModuleRepository moduleRepository;
 
-    public List<ModuleEntity> getAllParametrized(){
-        return moduleRepository.findAllParametrized();
+    public List<ModuleEntity> getAll(){
+        return moduleRepository.findAll();
     }
 }

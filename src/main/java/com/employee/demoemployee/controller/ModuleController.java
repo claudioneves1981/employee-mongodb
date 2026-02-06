@@ -23,9 +23,9 @@ public class ModuleController {
     private final ModuleService moduleService;
 
     @GetMapping
-    public ResponseEntity<List<ModuleEntity>> getAllParametrized(){
+    public ResponseEntity<List<ModuleEntity>> getAll(){
 
-        List<ModuleEntity> modules = moduleService.getAllParametrized();
+        List<ModuleEntity> modules = moduleService.getAll();
         return ResponseEntity.status(HttpStatus.CREATED).body(modules);
 
 

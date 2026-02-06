@@ -45,16 +45,14 @@ public class EmployeeService {
 
     public void create(EmployeeEntity employee) {
 
-        //accessService.create(employee, m);
-        employee.getModules().forEach(moduleRepository::save);
+
+        employee.getAccesses().stream()
+                .map(AccessEntity::getId)
+                .forEach(m-> accessService.create(employee.getId(),m.getModuleId()));
 
 
-            //accessService.create(employee, module);
 
- //employeeRepository.save(employee);
-       //}
-
-
+       employeeRepository.save(employee);
 
     }
 

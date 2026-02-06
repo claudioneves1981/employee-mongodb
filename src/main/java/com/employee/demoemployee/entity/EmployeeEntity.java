@@ -7,6 +7,7 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity(name="employees")
@@ -29,15 +30,16 @@ public class EmployeeEntity {
             cascade = CascadeType.ALL)
     private List<ContactEntity> contacts;
 
-    @OneToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    /*@OneToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "accesses",
             joinColumns = @JoinColumn(name = "employee_id"),
             inverseJoinColumns = @JoinColumn(name = "module_id"))
-    private List<ModuleEntity> modules;
+    private List<ModuleEntity> modules;*/
 
-    public void addModuleEnitity(ModuleEntity module) {
-        modules.add(module);
-    }
+    @OneToMany(mappedBy = "employee")
+    Set<AccessEntity> accesses;
+
+
 
 
 

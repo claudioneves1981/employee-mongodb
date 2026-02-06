@@ -6,6 +6,7 @@ import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity(name="modules")
@@ -21,16 +22,17 @@ public class ModuleEntity {
 
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    /*@OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "accesses",
             joinColumns = @JoinColumn(name = "module_id"),
             inverseJoinColumns = @JoinColumn(name = "employee_id"))
     @JsonIgnore
     @ToString.Exclude
-    private List<EmployeeEntity> employees;
+    private List<EmployeeEntity> employees;*/
 
-    public void addEmployeeEnitity(EmployeeEntity employee) {
-        employees.add(employee);
-    }
+  @OneToMany(mappedBy = "module")
+  @JsonIgnore
+  @ToString.Exclude
+  Set<AccessEntity> accesses;
 
 }

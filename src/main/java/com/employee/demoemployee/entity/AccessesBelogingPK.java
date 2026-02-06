@@ -3,32 +3,22 @@ package com.employee.demoemployee.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.hibernate.annotations.Cascade;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 @Data
 @Embeddable
-public class AccessesBelogingPK {
+@EqualsAndHashCode
+public class AccessesBelogingPK implements Serializable {
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "employee_id")
-    private EmployeeEntity employee;
+    @Column(name = "employee_id")
+    private Long employeeId;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "module_id")
-    private ModuleEntity module;
+    @Column(name = "module_id")
+    private Long moduleId;
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        AccessesBelogingPK that = (AccessesBelogingPK) o;
-        return Objects.equals(employee, that.employee) && Objects.equals(module, that.module);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(employee, module);
-    }
 }
