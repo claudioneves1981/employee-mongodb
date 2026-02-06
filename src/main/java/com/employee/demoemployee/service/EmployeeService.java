@@ -1,23 +1,27 @@
 package com.employee.demoemployee.service;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.employee.demoemployee.entity.EmployeeEntity;
-import com.employee.demoemployee.entity.ModuleEntity;
+import com.employee.demoemployee.entity.*;
+import com.employee.demoemployee.repository.ContactRepository;
 import com.employee.demoemployee.repository.EmployeeRepository;
 import com.employee.demoemployee.repository.ModuleRepository;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
 
     private final ModuleRepository moduleRepository;
+
+    private final ContactRepository contactRepository;
 
     private final AccessService accessService;
 
@@ -39,18 +43,19 @@ public class EmployeeService {
         return employeeRepository.findAllByOrderByName(pageable).getContent();
     }
 
-    public EmployeeEntity create(EmployeeEntity employee) {
+    public void create(EmployeeEntity employee) {
+
+        //accessService.create(employee, m);
+        employee.getModules().forEach(moduleRepository::save);
 
 
-        List<ModuleEntity> modules = employee.getModules();
-        for(ModuleEntity module : modules){
+            //accessService.create(employee, module);
 
-                moduleRepository.save(module);
-                accessService.create(employee, module);
+ //employeeRepository.save(employee);
+       //}
 
-        }
 
-        return employeeRepository.save(employee);
+
     }
 
     public EmployeeEntity update(EmployeeEntity employee) {

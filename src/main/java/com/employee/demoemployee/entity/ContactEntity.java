@@ -20,9 +20,10 @@ public class ContactEntity {
 
     private String type;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "employee_id")
     @JsonIgnore
+    @ToString.Exclude
     private EmployeeEntity employee;
 
 }

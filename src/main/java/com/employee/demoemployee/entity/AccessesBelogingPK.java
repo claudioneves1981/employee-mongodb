@@ -1,10 +1,10 @@
 package com.employee.demoemployee.entity;
 
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
+import org.hibernate.annotations.Cascade;
 
 import java.util.Objects;
 
@@ -12,11 +12,11 @@ import java.util.Objects;
 @Embeddable
 public class AccessesBelogingPK {
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "employee_id")
     private EmployeeEntity employee;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "module_id")
     private ModuleEntity module;
 

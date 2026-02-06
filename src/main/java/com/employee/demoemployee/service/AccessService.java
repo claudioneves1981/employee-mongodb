@@ -1,15 +1,14 @@
 package com.employee.demoemployee.service;
 
-import com.employee.demoemployee.entity.AccessEntity;
-import com.employee.demoemployee.entity.AccessesBelogingPK;
-import com.employee.demoemployee.entity.EmployeeEntity;
-import com.employee.demoemployee.entity.ModuleEntity;
+import com.employee.demoemployee.entity.*;
 import com.employee.demoemployee.repository.AccessRepository;
 import com.employee.demoemployee.repository.EmployeeRepository;
 import com.employee.demoemployee.repository.ModuleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -31,18 +30,34 @@ public class AccessService {
 
         //employeeRepository.save(employee);
         //moduleRepository.save(module);
+        //List<EmployeeEntity> employees = new ArrayList<>();
+        //employees.add(employee);
+       // module.setEmployees(employees);
 
-        accessesBelogingPK.setModule(module);
+
+        //ContactEntity contact = new ContactEntity();
+        //contact.setEmployee(employee);
+
+        //moduleRepository.save(module);
+
+
         accessesBelogingPK.setEmployee(employee);
+        accessesBelogingPK.setModule(module);
+
 
         AccessEntity access = new AccessEntity();
+
         access.setId(accessesBelogingPK);
         access.setCreateData(false);
         access.setReadData(false);
         access.setUpdateData(false);
         access.setDeleteData(false);
 
+
         accessRepository.save(access);
+
+
+
 
     }
 

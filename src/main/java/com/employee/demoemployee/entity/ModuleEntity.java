@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -20,13 +21,16 @@ public class ModuleEntity {
 
     private String name;
 
-    @ManyToMany(fetch = FetchType.LAZY,
-            mappedBy = "modules",
-            cascade = {
-                CascadeType.PERSIST,
-                CascadeType.MERGE
-    })
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "accesses",
+            joinColumns = @JoinColumn(name = "module_id"),
+            inverseJoinColumns = @JoinColumn(name = "employee_id"))
     @JsonIgnore
+    @ToString.Exclude
     private List<EmployeeEntity> employees;
+
+    public void addEmployeeEnitity(EmployeeEntity employee) {
+        employees.add(employee);
+    }
 
 }

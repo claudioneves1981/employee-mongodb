@@ -1,5 +1,6 @@
 package com.employee.demoemployee.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,21 +24,21 @@ public class EmployeeEntity {
     private BigDecimal salary;
     private OffsetDateTime birthday;
 
-    @OneToMany(
+    @OneToMany(fetch = FetchType.LAZY,
+            orphanRemoval = true,
             cascade = CascadeType.ALL)
-    @JoinTable(name = "contacts",
-            joinColumns = @JoinColumn(name = "employee_id"),
-            inverseJoinColumns = @JoinColumn(name = "contact_id"))
     private List<ContactEntity> contacts;
 
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            })
+    @OneToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "accesses",
             joinColumns = @JoinColumn(name = "employee_id"),
             inverseJoinColumns = @JoinColumn(name = "module_id"))
     private List<ModuleEntity> modules;
+
+    public void addModuleEnitity(ModuleEntity module) {
+        modules.add(module);
+    }
+
+
 
 }

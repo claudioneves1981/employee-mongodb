@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class AccessController {
 
-    private AccessService accessService;
+    private final AccessService accessService;
 
     @PostMapping
     public ResponseEntity<AccessEntity> create(@RequestBody AccessEntity access) {
