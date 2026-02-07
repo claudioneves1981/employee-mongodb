@@ -44,7 +44,6 @@ public class AccessService {
         accessesBelogingPK.setEmployeeId(employeeId);
         accessesBelogingPK.setModuleId(moduleId);
 
-
         AccessEntity access = new AccessEntity();
 
         access.setId(accessesBelogingPK);
@@ -53,10 +52,7 @@ public class AccessService {
         access.setUpdateData(false);
         access.setDeleteData(false);
 
-
         accessRepository.save(access);
-
-
 
 
     }

@@ -6,6 +6,7 @@ import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -36,8 +37,11 @@ public class EmployeeEntity {
             inverseJoinColumns = @JoinColumn(name = "module_id"))
     private List<ModuleEntity> modules;*/
 
-    @OneToMany(mappedBy = "employee")
-    Set<AccessEntity> accesses;
+    //@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY,
+            orphanRemoval = true,
+            cascade = CascadeType.ALL)
+    private Set<AccessEntity> accesses;
 
 
 

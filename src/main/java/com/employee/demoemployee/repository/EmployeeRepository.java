@@ -14,7 +14,7 @@ public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long> 
 
     Page<EmployeeEntity> findAllByOrderByName(Pageable pageable);
 
-    @Query(
+    /*@Query(
     "SELECT e.id as employee_id," +
             "e.name, " +
             "e.salary, " +
@@ -27,7 +27,7 @@ public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long> 
             "ON c.id = e.id " +
             "WHERE e.id = :id"
     )
-    Optional<EmployeeEntity> findByIdParametrized(Long id);
+    Optional<EmployeeEntity> findByIdParametrized(Long id);*/
 
 
 

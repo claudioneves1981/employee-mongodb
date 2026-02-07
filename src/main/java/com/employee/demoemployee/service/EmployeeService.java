@@ -29,9 +29,9 @@ public class EmployeeService {
         return employeeRepository.findById(id);
     }
 
-    public Optional<EmployeeEntity> getByIdParametrized(Long id) {
-        return employeeRepository.findByIdParametrized(id);
-    }
+    //public Optional<EmployeeEntity> getByIdParametrized(Long id) {
+   //      return employeeRepository.findByIdParametrized(id);
+   // }
 
     public List<EmployeeEntity> getAll(int pageNumber, int pageSize) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);

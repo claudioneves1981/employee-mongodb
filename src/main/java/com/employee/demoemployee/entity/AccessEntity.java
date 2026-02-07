@@ -1,5 +1,6 @@
 package com.employee.demoemployee.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,12 +18,13 @@ public class AccessEntity {
     @EmbeddedId
     private AccessesBelogingPK id = new AccessesBelogingPK();
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
     @MapsId("employeeId")
     @JoinColumn(name = "employee_id")
-    private EmployeeEntity employee;
+    @JsonIgnore
+    private EmployeeEntity employee = new EmployeeEntity();
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
     @MapsId("moduleId")
     @JoinColumn(name = "module_id")
     private ModuleEntity module;

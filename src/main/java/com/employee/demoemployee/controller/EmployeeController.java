@@ -30,7 +30,7 @@ public class EmployeeController {
 
     @GetMapping("/{id}")
     public ResponseEntity<EmployeeEntity> getById(@PathVariable Long id) {
-        Optional<EmployeeEntity> employee = employeeService.getByIdParametrized(id);
+        Optional<EmployeeEntity> employee = employeeService.getById(id);
         return employee.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
@@ -62,7 +62,7 @@ public class EmployeeController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
-        Optional<EmployeeEntity> employee = employeeService.getByIdParametrized(id);
+        Optional<EmployeeEntity> employee = employeeService.getById(id);
         if (employee.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT)
                     .body("No employee matches ID " + id);
