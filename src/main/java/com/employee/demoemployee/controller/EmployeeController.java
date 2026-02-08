@@ -54,11 +54,11 @@ public class EmployeeController {
         return ResponseEntity.status(HttpStatus.CREATED).body(employee);
     }
 
-    @PutMapping
+    /*@PutMapping
     public ResponseEntity<EmployeeEntity> update(@RequestBody EmployeeEntity employee) {
         EmployeeEntity updatedEmployee = employeeService.update(employee);
         return ResponseEntity.ok(updatedEmployee);
-    }
+    }*/
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {

@@ -18,6 +18,7 @@ public class ModuleEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @JsonIgnore
     private long id;
 
     private String name;
@@ -33,6 +34,6 @@ public class ModuleEntity {
   @OneToMany(mappedBy = "module")
   @JsonIgnore
   @ToString.Exclude
-  Set<AccessEntity> accesses;
+  private Set<AccessEntity> accesses;
 
 }

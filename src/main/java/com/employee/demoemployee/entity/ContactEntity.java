@@ -14,6 +14,7 @@ public class ContactEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @JsonIgnore
     private long id;
 
     private String description;
@@ -21,9 +22,9 @@ public class ContactEntity {
     private String type;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "employee_id")
+    @JoinColumn(name = "employee_id", nullable = false, insertable = false)
     @JsonIgnore
-    @ToString.Exclude
+    //@ToString.Exclude
     private EmployeeEntity employee;
 
 }

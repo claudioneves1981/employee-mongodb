@@ -2,10 +2,7 @@ package com.employee.demoemployee.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @Entity(name ="accesses")
@@ -18,15 +15,16 @@ public class AccessEntity {
     @EmbeddedId
     private AccessesBelogingPK id = new AccessesBelogingPK();
 
-    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+    @ManyToOne(cascade = CascadeType.ALL)
     @MapsId("employeeId")
-    @JoinColumn(name = "employee_id")
+    @JoinColumn(name = "employee_id", nullable = false)
     @JsonIgnore
-    private EmployeeEntity employee = new EmployeeEntity();
+    //@ToString.Exclude
+    private EmployeeEntity employee;
 
-    @ManyToOne(cascade = CascadeType.ALL, optional = false)
+    @ManyToOne(cascade = CascadeType.ALL)
     @MapsId("moduleId")
-    @JoinColumn(name = "module_id")
+    @JoinColumn(name = "module_id", nullable = false)
     private ModuleEntity module;
 
     private boolean readData;

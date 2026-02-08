@@ -20,6 +20,7 @@ public class EmployeeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @JsonIgnore
     private Long id;
 
     private String name;
@@ -28,7 +29,7 @@ public class EmployeeEntity {
 
     @OneToMany(fetch = FetchType.LAZY,
             orphanRemoval = true,
-            cascade = CascadeType.ALL)
+    cascade = CascadeType.ALL)
     private List<ContactEntity> contacts;
 
     /*@OneToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
@@ -37,10 +38,7 @@ public class EmployeeEntity {
             inverseJoinColumns = @JoinColumn(name = "module_id"))
     private List<ModuleEntity> modules;*/
 
-    //@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
-    @OneToMany(fetch = FetchType.LAZY,
-            orphanRemoval = true,
-            cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.MERGE)
     private Set<AccessEntity> accesses;
 
 

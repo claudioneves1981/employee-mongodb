@@ -13,15 +13,13 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+
+
 @Service
 @AllArgsConstructor
 public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
-
-    private final ModuleRepository moduleRepository;
-
-    private final ContactRepository contactRepository;
 
     private final AccessService accessService;
 
@@ -46,17 +44,18 @@ public class EmployeeService {
     public void create(EmployeeEntity employee) {
 
 
-        employee.getAccesses().stream()
-                .map(AccessEntity::getId)
-                .forEach(m-> accessService.create(employee.getId(),m.getModuleId()));
+        /*employee.getAccesses()
+                .stream()
+                .map(AccessEntity::getModule)
+                .forEach(m-> accessService.create(employee.getId(),m.getId()));*/
 
 
 
-       employeeRepository.save(employee);
+        employeeRepository.save(employee);
 
     }
 
-    public EmployeeEntity update(EmployeeEntity employee) {
+    /*public EmployeeEntity update(EmployeeEntity employee) {
 
         EmployeeEntity updatedEmployee = new EmployeeEntity();
 
@@ -68,7 +67,7 @@ public class EmployeeService {
         }
 
         return employeeRepository.save(updatedEmployee);
-    }
+   // }*/
 
     public void delete(Long id) {
         employeeRepository.deleteById(id);
